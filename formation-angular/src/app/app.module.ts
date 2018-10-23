@@ -4,15 +4,23 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { TitreComponent } from './titre/titre.component';
+import { MenuComponent } from './menu/menu.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    TitreComponent,
+    MenuComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
