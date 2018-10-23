@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TitreComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  isconected: boolean;
+
+  constructor() {
+    this.title = 'D\'akor' ;
+    this.isconected = false;
+  }
 
   ngOnInit() {
   }

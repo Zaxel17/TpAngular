@@ -1,10 +1,11 @@
 <header>
-  <button class="float-right btn btn-outline-success">Login
+  <button class="float-right btn btn-outline-success" [hidden]="isconected"  (click)="isconected=!isconected">Login
   </button>
-  <button class="float-right btn btn-outline-warning">Logout
+  <button class="float-right btn btn-outline-warning" [hidden]="!isconected" (click)="isconected=!isconected">Logout
   </button>
   <h1>Shared Todo List</h1>
   <div class="alert alert-info">
     Bienvenue sur notre application de tâches et d'idées
+    <h1>{{ title}}</h1>
   </div>
 </header>

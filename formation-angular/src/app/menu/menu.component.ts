@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  menu: Array<string> = ['Tâche custom', 'Idée custom']
+  user: User;
+
+  constructor() {
+    this.user = new User(1, 'name', 'a@a');
+  }
 
   ngOnInit() {
   }

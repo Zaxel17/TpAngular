@@ -1,17 +1,17 @@
 <nav>
   <div class="btn-group" ngbDropdown>
-    <button class="btn btn-outline-primary">Taches</button>
-    <button class="btn btn-outline-primary">Idées</button>
+    <button class="btn btn-outline-primary">{{menu[0]}}</button>
+    <button class="btn btn-outline-primary">{{menu[1]}}</button>
     <button class="btn btn-outline-primary" ngbDropdownToggle>
       Mon Compte
     </button>
     <div class="dropdown-menu" ngbDropdownMenu>
-      <h6 class="dropdown-header">John Doe</h6>
+      <h6 class="dropdown-header">{{user.name}}</h6>
       <button class="dropdown-item">Mes taches</button>
       <button class="dropdown-item">Mes idées</button>
     </div>
     <form class="form-inline">
-      <input class="form-control" value="John Doe">
+      <input class="form-control" [(ngModel)]="user.name" name="nameuser" value="John Doe" >
     </form>
   </div>
 </nav>

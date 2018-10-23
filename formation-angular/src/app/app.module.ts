@@ -8,6 +8,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { TitreComponent } from './titre/titre.component';
 import { MenuComponent } from './menu/menu.component';
 
+import {FormsModule} from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { MenuComponent } from './menu/menu.component';
   ],
   imports: [
     BrowserModule,
-    NgbModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
