@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WebSockets - Simple chat</title>
+
+    <style>
+        * { font-family:tahoma; font-size:12px; padding:0px; margin:0px; }
+        p { line-height:18px; }
+        div { width:500px; margin-left:auto; margin-right:auto;}
+        #content { padding:5px; background:#ddd; border-radius:5px; overflow-y: scroll;
+                   border:1px solid #CCC; margin-top:10px; height: 160px; }
+        #input { border-radius:2px; border:1px solid #ccc;
+                 margin-top:10px; padding:5px; width:400px;  }
+        #status { width:88px; display:block; float:left; margin-top:15px; }
+        </style>
+</head>
+
+<body>
+    <div id="content"></div>
+    <div>
+        <span id="status">Connecting...</span>
+        <input type="text" id="input" />
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous">
+        </script>
+
+    <script>
+        var ws = new WebSocket("ws://192.168.110.38:1337");
+        ws.onopen = function (evt) {
+            console.log("je suis co !");
+            document.getElementById("status").innerHTML = "Connecté";
+            ws.send("Axel");
+        }
+
+        //ws.onerror
+        // afficher le local storage
+
+
+        ws.onmessage = function (evt) {
+            var message = JSON.parse(evt.data);
+            if (message.type == "history") {
+                for (var i = 0; i < message.data.length; i++) {
+                    var data = message.data[i].object.content;
+                    var author = message.data[i].author;
+                    var color = message.data[i].color;
+                    var div = "<div style=\"color:" + color + ";\">" + author + " : " + data + "</div>";
+                    document.getElementById("content").innerHTML += div;
+                }
+            }
+            else if (message.type == "message") {
+                var data = message.data.object.content;
+                var author = message.data.author;
+                var color = message.data.color;
+                var div = "<div style=\"color:" + color + ";\">" + author + " : " + data + "</div>";
+                document.getElementById("content").innerHTML += div;
+            }
+            var messages = localStorage.getItem('message');
+            if(!messages){
+                messages = [];
+            }
+            messages.push(message);
+            localStorage.setItem('messages',JSON.stringify(messages));
+        }
+
+        document.getElementById("input").addEventListener("keypress", (event) => {
+            const keyname = event.key;
+            if (keyname !== "Enter") {
+                return;
+            }
+            else {
+                var object = {
+                    identifer: 'text',
+                    content: document.getElementById("input").value
+                }
+                ws.send(JSON.stringify(object));
+                document.getElementById("input").value = "";
+            }
+        })
+
+// var obj = {
+     //identifer: "text",
+     //content : 'salut'
+//}
+// ws.send(JSON.stringify(obj));
+    </script>
+</body>
+
+</html>

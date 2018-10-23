@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebSockets - Simple chat</title>
+
+        <style>
+        * { font-family:tahoma; font-size:12px; padding:0px; margin:0px; }
+        p { line-height:18px; }
+        div { width:500px; margin-left:auto; margin-right:auto;}
+        #content { padding:5px; background:#ddd; border-radius:5px; overflow-y: scroll;
+                   border:1px solid #CCC; margin-top:10px; height: 400px; }
+        #input { border-radius:2px; border:1px solid #ccc;
+                 margin-top:10px; padding:5px; width:400px;  }
+        #status { width:88px; display:block; float:left; margin-top:15px; }
+        </style>
+    </head>
+    <body>
+    <img id="image">
+        <div id="content"></div>
+        <div>
+            <span id="status">Connecting...</span>
+            <input type="text" id="input" disabled="disabled" />
+        </div>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous">
+</script>
+    <script>
+        $(function() {
+          var ws = new WebSocket('ws://192.168.110.38:1337');
+          var input = $('#input');
+          var status = $('#status');
+          var content = $('#content');
+
+
+          ws.onopen = function(e) {
+            console.log('Connected');
+            input.prop('disabled', false);
+            status.html('Connected!');
+          }
+
+          ws.onmessage = function(e) {
+            var obj = JSON.parse(e.data);
+            switch (obj.type) {
+              case 'history':
+                for (var i = 0; i < obj.data.length; i++) {
+                  addVideo(obj.data[i].author, obj.data[i].object.content,
+                    obj.data[i].color, new Date(obj.data[i].time));
+                }
+                break;
+              case 'message':
+                // addMessage(obj.data.author, obj.data.object.content,
+                //   obj.data.color, new Date(obj.data.time));
+                addVideo(obj.data.author, obj.data.object.content,
+                  obj.data.color, new Date(obj.data.time));
+                break;
+              case 'color':
+                break;
+            }
+          }
+
+          function addMessage(author, message, color, dt) {
+            content.prepend('<p><span style="color:' + color + '">' + author + '</span> @ ' +
+              + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
+              + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
+              + ': ' + message + '</p>');
+          }
+
+          function addVideo(author, message, color, dt) {
+              var vid = "<video src=\""+message+"\"width=\"150\" height=\"150\" controls></video>";
+            content.prepend('<p><span style="color:' + color + '">' + author + '</span> @ ' +
+              + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
+              + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
+              + ': ' + vid + '</p>');
+          }
+
+          var name;
+          input.keydown(function(event) {
+            if (event.key === "Enter") {
+              var value = input.val();
+              if (!name) {
+                name = value;
+                ws.send(value);
+                return;
+              }
+            //   var obj = {
+            //     identifier: 'text',
+            //     content: value
+            //   }
+            var obj = {
+                identifier: 'video',
+                content: value
+            }
+              ws.send(JSON.stringify(obj));
+            }
+          })
+
+        })
+
+    </script>
+    </body>
+</html>

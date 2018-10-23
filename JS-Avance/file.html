@@ -1,0 +1,20 @@
+<input type="file" id="files" multiple=true>
+<div id="container"></div>
+
+<script>
+
+function lirefichier(e){
+    var reader = new FileReader();
+    var fichier = e.target.files[0]; 
+    reader.onload = function(evt){
+        console.log(evt.target.result);
+        document.getElementById("container").innerHTML = evt.target.result;
+    }
+    reader.readAsText(fichier);
+}
+
+var file = document.getElementById("files");
+file.addEventListener("change",lirefichier);
+
+
+</script>

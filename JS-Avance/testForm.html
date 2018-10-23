@@ -1,0 +1,50 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <form>
+        <input type="color">
+        <br>
+        <input type="date" required>
+        <br>
+        <input type="datetime" >
+        <br>
+        <input type="week">
+        <br>
+        <input type="month">
+        <br>
+        <datalist id="datalist">
+            <option value="1" label="Test 1"></option>
+            <option value="2" label="Test 2"></option>
+            <option value="3" label="Test 3"></option>
+        </datalist>
+        <br>
+        <input type="text" list="datalist" required>
+        <input type="submit">
+        <br>
+    </form>
+    <form>
+        <label>Nom :</label>
+        <input type="text" id="name" required>
+        <label>Numero</label>
+        <input type="text" id="tel" pattern="^(0|\+33 )[1-689]([ .-]?\d{2}){4}$" required>
+        <label>Nombre</label>
+        <input type="number" id="num" >
+        <input type="submit" onclick="valid()" value="Valider">
+    </form>
+
+    <script>
+    function valid(){
+        var c = document.getElementById("num").value;
+        if(c%2!=0 ){
+            alert("Mettre un chiffre pair");
+        }
+    }
+    
+    </script>
+</body>
+</html>>
