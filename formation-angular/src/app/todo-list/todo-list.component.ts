@@ -41,7 +41,6 @@ export class TodoListComponent implements OnInit {
     const user = new User(1, 'no-name', 'a@a');
     const tach = new Todo(id, this.nouvelletache, false, user);
     this.listtodos.addTodo(tach);
-    this.listeTache = this.listtodos.getTodos();
   }
 
   selectRow(todo) {

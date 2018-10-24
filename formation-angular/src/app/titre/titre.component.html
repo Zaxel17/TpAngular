@@ -1,7 +1,7 @@
 <header>
-  <button class="float-right btn btn-outline-success" [hidden]="isconected"  (click)="isconected=!isconected">Login
+  <button class="float-right btn btn-outline-success" *ngIf="isconected"  (click)="disconnected()">Login
   </button>
-  <button class="float-right btn btn-outline-warning" [hidden]="!isconected" (click)="isconected=!isconected">Logout
+  <button class="float-right btn btn-outline-warning" *ngIf="!isconected" (click)="connection()">Logout
   </button>
   <h1>Shared Todo List</h1>
 

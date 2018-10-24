@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectionService} from '../services/connection.service';
 
 @Component({
   selector: 'app-titre',
@@ -10,11 +11,20 @@ export class TitreComponent implements OnInit {
   title: string;
   isconected: boolean;
 
-  constructor() {
-    this.isconected = false;
+  constructor(private connect: ConnectionService ) {
+    this.isconected = connect.isconnected();
   }
 
   ngOnInit() {
   }
 
+  disconnected() {
+    this.connect.deconnect();
+    this.isconected = this.connect.isconnected();
+  }
+
+  connection() {
+    this.connect.connect();
+    this.isconected = this.connect.isconnected();
+  }
 }

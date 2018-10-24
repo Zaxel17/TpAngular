@@ -6,7 +6,7 @@ import {User} from '../models/user.model';
 })
 export class UsersService {
 
-  users: Array<User>;
+  private users: Array<User>;
 
   constructor() {
     this.users = [
