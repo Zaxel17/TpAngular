@@ -8,7 +8,7 @@ import {User} from '../models/user.model';
 })
 export class MenuComponent implements OnInit {
 
-  menu: Array<string> = ['Tâche custom', 'Idée custom']
+  menu: Array<string> = ['Tâche custom', 'Idée custom'];
   user: User;
 
   constructor() {

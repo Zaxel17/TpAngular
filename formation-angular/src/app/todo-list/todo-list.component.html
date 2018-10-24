@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>{{tableHeader[0] | uppercase}}</th>
+    <th>{{tableHeader[1] | uppercase}}</th>
+    <th>{{nbTofoLeft()}}/{{listeTache.length}}</th>
+  </tr>
+  <tr>
+    <th><input class="form-control" placeholder="Nouvelle tâche" name="nouvelleTache" value="Nouvelle tâche" [(ngModel)]="nouvelletache"></th>
+    <th></th>
+    <th><button class="btn btn-outline-success" (click)="addTodo()">Ajouter</button></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let todo of listeTache"  >
+    <td>{{ todo.title}} (click)="isSelect = true"</td>
+    <td></td>
+    <td>
+        <fa-icon icon="check-double" [ngStyle]="{'color':todo.completed?'green':'lightgray'}" (click)="todo.completed=!todo.completed"></fa-icon>
+    </td>
+  </tr>
+  </tbody>
+</table>
