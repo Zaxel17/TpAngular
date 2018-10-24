@@ -16,6 +16,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import {ConnectionService} from './services/connection.service';
+import {CurrentUserService} from './services/current-user.service';
+import {UsersService} from './services/users.service';
+import {TodoService} from './services/todo.service';
 
 library.add(faCoffee, fas, far);
 
@@ -33,7 +37,12 @@ library.add(faCoffee, fas, far);
     NgbModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    ConnectionService,
+    CurrentUserService,
+    UsersService,
+    TodoService
+  ],
   bootstrap: [AppComponent]
 })
 

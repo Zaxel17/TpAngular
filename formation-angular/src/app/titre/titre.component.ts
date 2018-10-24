@@ -11,7 +11,6 @@ export class TitreComponent implements OnInit {
   isconected: boolean;
 
   constructor() {
-    this.title = 'A.O.T 2' ;
     this.isconected = false;
   }
 

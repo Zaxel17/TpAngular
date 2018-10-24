@@ -16,7 +16,11 @@
     <td (click)="selectRow(todo)"><p *ngIf="todo.title!==this.rowSelect" >{{ todo.title}}</p>
       <input type="text" *ngIf="todo.title===this.rowSelect" value="{{ todo.title}}" [(ngModel)]="todo.title" (click)="inputClick($event)" [disabled]="todo.completed">
     </td>
-    <td></td>
+    <td >
+      <select class="form-control" >
+        <option *ngFor="let user of listUser" >{{user.name}}</option>
+      </select>
+    </td>
     <td>
         <fa-icon icon="check-double" [ngStyle]="{'color':todo.completed?'green':'lightgray'}" (click)="todo.completed=!todo.completed"></fa-icon>
     </td>
