@@ -12,7 +12,7 @@ export class TodoListComponent implements OnInit {
   listeTache: Array<Todo>;
   tableHeader: Array<string>;
   nouvelletache: string;
-  isSelect: boolean;
+  rowSelect: string;
 
   constructor() {
     this.listeTache = [];
@@ -38,9 +38,23 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo() {
-    let id = this.listeTache[this.listeTache.length - 1].id + 1;
+    const id = this.listeTache[this.listeTache.length - 1].id + 1;
     const user = new User(1, 'no-name', 'a@a');
-    let tach = new Todo(id, this.nouvelletache, false, user);
+    const tach = new Todo(id, this.nouvelletache, false, user);
     this.listeTache.push(tach);
+  }
+
+  selectRow(todo) {
+    if(this.rowSelect == todo.title){
+      this.rowSelect = null;
+    }
+    else{
+      this.rowSelect = todo.title;
+    }
+
+  }
+
+  inputClick($event) {
+    $event.stopPropagation();
   }
 }

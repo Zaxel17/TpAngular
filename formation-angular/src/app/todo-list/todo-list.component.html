@@ -12,8 +12,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let todo of listeTache"  >
-    <td>{{ todo.title}} (click)="isSelect = true"</td>
+  <tr *ngFor="let todo of listeTache"  [ngClass]="{'table-active':todo.title===this.rowSelect}" >
+    <td (click)="selectRow(todo)"><p *ngIf="todo.title!==this.rowSelect" >{{ todo.title}}</p>
+      <input type="text" *ngIf="todo.title===this.rowSelect" value="{{ todo.title}}" [(ngModel)]="todo.title" (click)="inputClick($event)" [disabled]="todo.completed">
+    </td>
     <td></td>
     <td>
         <fa-icon icon="check-double" [ngStyle]="{'color':todo.completed?'green':'lightgray'}" (click)="todo.completed=!todo.completed"></fa-icon>
